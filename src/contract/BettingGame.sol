@@ -76,7 +76,6 @@ contract BettingGame is VRFConsumerBase {
      * assign ETH/USD Rinkeby contract address to the aggregator variable.
      * more: https://docs.chain.link/docs/ethereum-addresses
      */
-     
     ethUsd = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e);
   }
   
