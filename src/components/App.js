@@ -81,27 +81,29 @@ class App extends Component {
       var randomSeed = Math.floor(Math.random() * Math.floor(1e9))
 
       //Send bet to the contract and wait for the verdict
-      this.state.contract.methods.game(bet, randomSeed).send({from: this.state.account, value: amount}).on('transactionHash', (hash) => {
-        this.setState({ loading: true })
-        this.state.contract.events.Result({}, async (error, event) => {
-          const verdict = event.returnValues.winAmount
-          if(verdict === '0') {
-            window.alert('lose :(')
-          } else {
-            window.alert('WIN!')
-          }
+      this.state.contract.methods.game(bet, randomSeed)
+        .send({from: this.state.account, value: amount})
+        .on('transactionHash', (hash) => {
+          this.setState({ loading: true })
+          this.state.contract.events.Result({}, async (error, event) => {
+            const verdict = event.returnValues.winAmount
+            if(verdict === '0') {
+              window.alert('lose :(')
+            } else {
+              window.alert('WIN!')
+            }
 
-          //Prevent error when user logout, while waiting for the verdict
-          if(this.state.account!==null && typeof this.state.account!=='undefined'){
-            const balance = await this.state.web3.eth.getBalance(this.state.account)
-            const maxBet = await this.state.web3.eth.getBalance(this.state.contractAddress)
-            this.setState({ balance: balance, maxBet: maxBet })
-          }
-          this.setState({ loading: false })
+            //Prevent error when user logout, while waiting for the verdict
+            if(this.state.account!==null && typeof this.state.account!=='undefined'){
+              const balance = await this.state.web3.eth.getBalance(this.state.account)
+              const maxBet = await this.state.web3.eth.getBalance(this.state.contractAddress)
+              this.setState({ balance: balance, maxBet: maxBet })
+            }
+            this.setState({ loading: false })
+          })
+        }).on('error', (error) => {
+          window.alert('Error')
         })
-      }).on('error', (error) => {
-        window.alert('Error')
-      })
     } else {
       window.alert('Problem with account or network')
     }
