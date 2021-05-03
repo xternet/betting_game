@@ -14,7 +14,7 @@
 pragma solidity 0.6.6;
 
 import "https://raw.githubusercontent.com/smartcontractkit/chainlink/master/evm-contracts/src/v0.6/VRFConsumerBase.sol";
-import "https://github.com/smartcontractkit/chainlink/blob/master/evm-contracts/src/v0.6/interfaces/AggregatorV3Interface.sol"; /* !UPDATE, import aggregator contract */
+import "https://github.com/smartcontractkit/chainlink/blob/master/evm-contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
 
 contract BettingGame is VRFConsumerBase {
     
@@ -62,7 +62,16 @@ contract BettingGame is VRFConsumerBase {
   
   event Withdraw(address admin, uint256 amount);
   event Received(address indexed sender, uint256 amount);
-  event Result(uint256 id, uint256 bet, uint256 randomSeed, uint256 amount, address player, uint256 winAmount, uint256 randomResult, uint256 time);
+  event Result(
+    uint256 id,
+    uint256 bet,
+    uint256 randomSeed,
+    uint256 amount,
+    address player,
+    uint256 winAmount,
+    uint256 randomResult,
+    uint256 time
+  );
   
   /**
    * Constructor inherits VRFConsumerBase.
