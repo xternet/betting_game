@@ -31,7 +31,7 @@ contract BettingGame is VRFConsumerBase {
   address constant VFRC_address = 0xb3dCcb4Cf7a26f6cf6B120Cf5A73875B7BBc655B; // VRF Coordinator
   address constant LINK_address = 0x01BE23585060835E02B77ef475b0Cc51aA1e0709; // LINK token
   
-  //declaring 50% chance, (0.5*(uint256+1))
+  //~50% chance (0.5*(uint256+1))
   uint256 constant half = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
   
   //keyHash - one of the component from which will be generated final random value by Chainlink VFRC.
